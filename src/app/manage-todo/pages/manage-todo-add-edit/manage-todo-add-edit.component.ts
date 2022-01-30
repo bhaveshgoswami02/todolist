@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { CommonService } from 'src/app/shared/services/common.service';
 import { ManageTodoService } from '../../services/manage-todo.service';
 
@@ -21,7 +22,8 @@ export class ManageTodoAddEditComponent implements OnInit {
 
   formData!: FormGroup
   matcher = new MyErrorStateMatcher();
-  index:any = null;
+  index: any = null;
+  seconds: number = 5;
 
   constructor(
     public fb: FormBuilder,
@@ -34,7 +36,7 @@ export class ManageTodoAddEditComponent implements OnInit {
   ngOnInit(): void {
     this.initializeForm()
     this.index = this.route.snapshot.paramMap.get("index")
-    if(this.index || this.index == 0) {
+    if (this.index || this.index == 0) {
       this.getSingleData()
     }
   }
@@ -46,6 +48,8 @@ export class ManageTodoAddEditComponent implements OnInit {
       'repeating_task': [, Validators.required],
       'is_completed': [false, Validators.required],
     })
+    this.formAutoSubmit()
+    this.startTimmer()
   }
 
   //---------------------------------------- Getters start --------------------------------------//
@@ -62,17 +66,45 @@ export class ManageTodoAddEditComponent implements OnInit {
   getSingleData() {
     let data = this.todoService.getSingle(this.index)
     this.formData.patchValue(data)
+    this.formAutoSubmit()
   }
 
-  onSubmit() {
-    if(this.index || this.index == 0) {
-      this.todoService.edit(this.index,this.formData.value)
+  formAutoSubmit() {
+    this.formData.valueChanges.subscribe(res=>{
+      this.resetTimmer()
+    })
+    this.formData.valueChanges.pipe(debounceTime(5000)).pipe(distinctUntilChanged()).subscribe((value: any) => {
+      console.log(value)
+      if (!this.formData.invalid) {
+        this.formSubmit()
+      }
+      else
+      {
+        this.resetTimmer()
+      }
+    });
+  }
+
+  startTimmer() {
+    setInterval(() => {
+      if(!this.formData.invalid) {
+        this.seconds--;
+      }
+    }, 1000);
+  }
+
+  resetTimmer() {
+    this.seconds = 5
+  }
+
+  formSubmit() {
+    if (this.index || this.index == 0) {
+      this.todoService.edit(this.index, this.formData.value)
     }
-    else
-    {
+    else {
       this.todoService.add(this.formData.value)
     }
     this.router.navigateByUrl("/manage-todo/listing")
   }
-  
+
 }

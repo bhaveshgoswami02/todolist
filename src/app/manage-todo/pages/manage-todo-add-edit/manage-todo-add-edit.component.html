@@ -12,7 +12,7 @@
     <div class="row mt-3">
         <div class="col-12">
             <mat-card>
-                <form [formGroup]="formData" (ngSubmit)="onSubmit()">
+                <form [formGroup]="formData">
                     <div>
                         <mat-form-field class="w-100" appearance="fill">
                             <mat-label>Enter title</mat-label>
@@ -45,9 +45,11 @@
                             </mat-error>
                         </mat-form-field>
                     </div>
-                    <div class="text-center">
-                        <button mat-raised-button color="primary" type="submit">Add</button>&nbsp;
-                    </div>
+                    <ng-container *ngIf="!formData.invalid">
+                        <div class="text-center">
+                            <p class="mb-0">Form auto submit in <b class="text-danger">{{seconds}} {{seconds == 1 || seconds == 0 ? 'second' : 'seconds'}}</b></p>
+                        </div>
+                    </ng-container>
                 </form>
             </mat-card>
         </div>
