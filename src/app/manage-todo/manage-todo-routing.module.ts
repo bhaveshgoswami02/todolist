@@ -27,6 +27,10 @@ const routes: Routes = [
                 path: 'add-edit',
                 component: ManageTodoAddEditComponent,
             },
+            {
+                path: 'add-edit/:index',
+                component: ManageTodoAddEditComponent,
+            },
         ]
     },
 ];

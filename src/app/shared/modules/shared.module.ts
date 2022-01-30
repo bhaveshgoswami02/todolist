@@ -5,11 +5,13 @@ import { LoaderComponent } from '../components/loader/loader.component';
 import { MaterialModule } from './material.module';
 import { HeaderComponent } from '../components/header/header.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { EmptyViewComponent } from '../components/empty-view/empty-view.component';
 
 @NgModule({
   declarations: [
     LoaderComponent,
     HeaderComponent,
+    EmptyViewComponent
   ],
   imports: [
     CommonModule,
@@ -22,6 +24,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     LoaderComponent,
     HeaderComponent,
+    EmptyViewComponent
   ],
   providers:[
   ]

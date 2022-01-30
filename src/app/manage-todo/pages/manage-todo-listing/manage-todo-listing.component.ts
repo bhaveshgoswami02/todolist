@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ManageTodoService } from '../../services/manage-todo.service';
 
 @Component({
   selector: 'app-manage-todo-listing',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ManageTodoListingComponent implements OnInit {
 
-  constructor() { }
+  all_data:any = []
+
+  constructor(public todoService: ManageTodoService) { }
 
   ngOnInit(): void {
+    this.getAll()
+  }
+
+  getAll() {
+    this.all_data = this.todoService.getAll()
+  }
+  
+  delete(index: number) {
+    this.todoService.delete(index)
   }
 
 }

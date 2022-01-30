@@ -1,1 +1,58 @@
-<p>manage-todo-listing works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-4">
+            <h2>All Lists</h2>
+        </div>
+        <div class="col-8 text-end">
+            <button mat-raised-button color="primary" routerLink="../add-edit">Add</button>&nbsp;
+            <button mat-raised-button color="primary" routerLink="../done-listing">Done Lists</button>
+        </div>
+    </div>
+    <mat-divider></mat-divider>
+
+    <!-- Show all list -->
+    <!-- <ng-container *ngIf="all_data.length>0 else list_empty"> -->
+        <ng-container *ngFor="let data of all_data;let i = index">
+            <mat-card class="my-3">
+                <div class="row">
+                    <div class="col-1 my-auto">
+                        <ng-container *ngIf="data.is_completed">
+                            <mat-checkbox [checked]="data.is_completed" (click)="data.is_completed = !data.is_completed"
+                                color="primary"></mat-checkbox>
+                        </ng-container>
+                        <ng-container *ngIf="!data.is_completed">
+                            <mat-checkbox [checked]="data.is_completed" (click)="data.is_completed = !data.is_completed"
+                                color="primary"></mat-checkbox>
+                        </ng-container>
+                    </div>
+                    <div class="col-7 my-auto">
+                        <h2 class="mb-0">{{data?.title}}</h2>
+                        <mat-card-subtitle class="mb-0">{{data?.description}}</mat-card-subtitle>
+                    </div>
+                    <div class="col-1 my-auto">
+                        <p class="mb-0 text-capitalize">{{data?.repeating_task}}</p>
+                    </div>
+                    <div class="col-3 text-end my-auto">
+                        <mat-icon class="mx-auto" color="accent" routerLink="/manage-todo/add-edit/{{i}}">edit
+                        </mat-icon>
+                        <mat-icon class="mx-auto" color="warn" (click)="delete(i)">delete_forever</mat-icon>
+                    </div>
+                </div>
+            </mat-card>
+        </ng-container>
+    <!-- </ng-container> -->
+
+    <!-- If list is empty -->
+    <!-- <ng-template #list_empty>
+        <app-empty-view>
+            <mat-card class="my-3 text-center">
+                <div class="row min-vh-25">
+                    <div class="col-12 my-auto">
+                        <h3>List not found.</h3>
+                    </div>
+                </div>
+            </mat-card>
+        </app-empty-view>
+    </ng-template> -->
+
+</div>

@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { MaterialModule } from '../shared/modules/material.module';
 import { SharedModule } from '../shared/modules/shared.module';
 import { ManageTodoRoutingModule } from './manage-todo-routing.module';
 import { ManageTodoComponent } from './manage-todo.component';
@@ -15,6 +16,7 @@ import { ManageTodoListingComponent } from './pages/manage-todo-listing/manage-t
     ],
     imports: [
         SharedModule,
+        MaterialModule,
         ManageTodoRoutingModule
     ],
 })
