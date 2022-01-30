@@ -4,24 +4,24 @@ import { RouterModule } from '@angular/router';
 import { LoaderComponent } from '../components/loader/loader.component';
 import { MaterialModule } from './material.module';
 import { HeaderComponent } from '../components/header/header.component';
-import { SidebarComponent } from '../components/sidebar/sidebar.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     LoaderComponent,
     HeaderComponent,
-    SidebarComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule
   ],
   exports: [
     CommonModule,
+    ReactiveFormsModule,
     LoaderComponent,
     HeaderComponent,
-    SidebarComponent,
   ],
   providers:[
   ]

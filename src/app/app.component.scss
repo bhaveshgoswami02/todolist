@@ -1,0 +1,32 @@
+.example-container {
+    height: 100vh;
+    background-color: #fafafa;
+    .example-sidenav {
+        width: 250px;
+        ul {
+            list-style: none;
+            padding: 0;
+            li {
+                border-bottom: 1px solid #000;
+                font-size: var(--primary-font-size);
+                margin: 10px 0;
+                padding: 4px;
+            }
+        }
+    }
+}
+
+// .example-sidenav-content {
+    //     display: flex;
+//     height: 100%;
+//     align-items: center;
+//     justify-content: center;
+// }
+
+.example-sidenav {
+    padding: 12px;
+}
+.mat-drawer-container {
+    background-color: #fff;
+    color: rgba(0,0,0,.87);
+}

@@ -8,7 +8,11 @@ import { CommonService } from './shared/services/common.service';
 })
 export class AppComponent {
   title = 'todo-app';
-  
-  constructor(public common:CommonService) {}
+
+  routes = [
+    { icon: 'home', title: 'Home', link: '/manage-landing' },
+    { icon: 'list', title: 'Manage Todo', link: '/manage-todo' },
+  ]
+  constructor(public common: CommonService) { }
 
 }

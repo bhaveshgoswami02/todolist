@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SidebarComponent } from './sidebar.component';
+import { ManageTodoListingComponent } from './manage-todo-listing.component';
 
-describe('SidebarComponent', () => {
-  let component: SidebarComponent;
-  let fixture: ComponentFixture<SidebarComponent>;
+describe('ManageTodoListingComponent', () => {
+  let component: ManageTodoListingComponent;
+  let fixture: ComponentFixture<ManageTodoListingComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SidebarComponent ]
+      declarations: [ ManageTodoListingComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SidebarComponent);
+    fixture = TestBed.createComponent(ManageTodoListingComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
