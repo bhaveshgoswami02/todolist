@@ -1,26 +1,40 @@
 <app-loader *ngIf="common.loader"></app-loader>
-<mat-drawer-container class="example-container" autosize>
-  <mat-drawer #drawer class="example-sidenav" mode="push">
-    <div class="row border-bottom">
-      <div class="col-6">
-        <h2>Todo App</h2>
+
+<!-- WINDOW RESIZE -->
+
+<ion-content *ngIf="this.windowInnerWidth > 769" [ngClass]="{windowresize: this.windowInnerWidth > 500}">
+  <app-empty-view>
+    <img src="assets/images/rotate.gif" class="rotate-img" alt="">
+    <p class="bold primary-contrast">We don't support desktop mode yet.<br> Please
+      open in mobile screen
+      mode for best experience</p>
+  </app-empty-view>
+</ion-content>
+
+<ng-container *ngIf="this.windowInnerWidth < 768">
+  <mat-drawer-container class="example-container" autosize>
+    <mat-drawer #drawer class="example-sidenav" mode="push">
+      <div class="row border-bottom">
+        <div class="col-6">
+          <h2>Todo App</h2>
+        </div>
+        <div class="col-6 text-end">
+          <mat-icon (click)="drawer.toggle()">close</mat-icon>
+        </div>
       </div>
-      <div class="col-6 text-end">
-        <mat-icon (click)="drawer.toggle()">close</mat-icon>
-      </div>
+      <ul>
+        <ng-container *ngFor="let route of routes">
+          <li class="d-flex" (click)="drawer.toggle()" [routerLink]="route.link" routerLinkActive="active">
+            <mat-icon class="my-auto">{{route.icon}}</mat-icon>&nbsp;&nbsp; <span class="my-auto">{{route.title}}</span>
+          </li>
+        </ng-container>
+      </ul>
+    </mat-drawer>
+  
+    <div class="example-sidenav-content">
+      <app-header [drawer]="drawer"></app-header>
+      <router-outlet></router-outlet>
     </div>
-    <ul>
-      <ng-container *ngFor="let route of routes">
-        <li class="d-flex" (click)="drawer.toggle()" [routerLink]="route.link" routerLinkActive="active">
-          <mat-icon class="my-auto">{{route.icon}}</mat-icon>&nbsp;&nbsp; <span class="my-auto">{{route.title}}</span>
-        </li>
-      </ng-container>
-    </ul>
-  </mat-drawer>
-
-  <div class="example-sidenav-content">
-    <app-header [drawer]="drawer"></app-header>
-    <router-outlet></router-outlet>
-  </div>
-
-</mat-drawer-container>
+  
+  </mat-drawer-container>
+</ng-container>

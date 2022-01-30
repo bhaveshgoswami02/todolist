@@ -74,5 +74,5 @@ export class ManageTodoAddEditComponent implements OnInit {
     }
     this.router.navigateByUrl("/manage-todo/listing")
   }
-
+  
 }
